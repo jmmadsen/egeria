@@ -56,11 +56,9 @@ if (env === 'development') {
   app.use('/', router);
 } else {
   // use Web Server routing for production build
-
-  // app.use(express.static(`${__dirname}/client/build`));
+  app.use('/', router);
   app.use(express.static(path.join(__dirname, '../cra-client/build')));
-  // app.all('*', (req, res, next) => res.sendFile(`${__dirname}/client/build/index.html`));
-  app.all('*', (req, res, next) => res.sendFile(path.join(__dirname, '../cra-client/build/index.html')));
+  app.get('/*', (req, res, next) => res.sendFile(path.join(__dirname, '../cra-client/build', 'index.html')));
 }
 
 // create the https server
